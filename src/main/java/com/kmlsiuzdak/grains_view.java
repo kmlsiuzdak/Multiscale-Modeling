@@ -54,7 +54,7 @@ public class grains_view extends Application {
     @Override
     public void start(Stage stage) throws error {
         try {
-            Scene scene = new Scene(getBorderPane(stage), xSize, ySize, Color.WHITE);
+            Scene scene = new Scene(get_border_pane(stage), xSize, ySize, Color.WHITE);
             stage.setScene(scene);
             stage.setMaximized(true);
             stage.show();
@@ -66,7 +66,7 @@ public class grains_view extends Application {
         }
     }
 
-    private BorderPane getBorderPane(Stage stage) {
+    private BorderPane get_border_pane(Stage stage) {
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(getMenu(stage));
         borderPane.setCenter(getScrollPane());
