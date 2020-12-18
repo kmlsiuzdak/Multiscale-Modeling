@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.kmlsiuzdak.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<SplitPane fx:controller="com.kmlsiuzdak.controller"
+           stylesheets="@style.css" orientation="VERTICAL"
+           xmlns:fx="http://javafx.com/fxml">
+    <GridPane alignment="center" hgap="20" vgap="20">
+        <Label text="Grain Growth" GridPane.columnIndex="0"
+               GridPane.rowIndex="0" GridPane.columnSpan="2"
+               GridPane.rowSpan="1" GridPane.halignment="CENTER" style="-fx-font-weight: bold; -fx-font-size: 21px;">
+            <GridPane.margin>
+                <Insets top="20" bottom="20"/>
+            </GridPane.margin>
+        </Label>
+        <Label text="X size:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="x_size" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label text="Y size:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="y_size" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label text="Number of cells:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="number_of_grains" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label text="Boundary transition: " GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <ChoiceBox fx:id="transition" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <Border_transition fx:value="NO"/>
+                    <Border_transition fx:value="YES"/>
+                </FXCollections>
+            </items>
+            <value>
+                <Border_transition fx:value="NO" />
+            </value>
+        </ChoiceBox>
+        <Label text="Number of inclusions:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <TextField fx:id="number_of_inclusions" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+        <Label text="Inclusion radius:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <TextField fx:id="length_of_inclusion" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+        <Label text="Inclusion boundary:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+        <ChoiceBox fx:id="inclusion_border" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <Inclusion_border fx:value="NO"/>
+                    <Inclusion_border fx:value="YES"/>
+                </FXCollections>
+            </items>
+            <value>
+                <Inclusion_border fx:value="NO" />
+            </value>
+        </ChoiceBox>
+        <Label text="Inclusion shape:" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+        <ChoiceBox fx:id="inclusion_shape" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="8" >
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <Inclusion_shape fx:value="SQUARE"/>
+                    <Inclusion_shape fx:value="CIRCLE"/>
+                </FXCollections>
+            </items>
+            <value>
+                <Inclusion_shape fx:value="SQUARE" />
+            </value>
+        </ChoiceBox>
+        <Button fx:id="submit" text="Generate"
+                prefWidth="100" prefHeight="40" defaultButton="true"
+                GridPane.columnIndex="0" GridPane.rowIndex="9"
+                GridPane.columnSpan="2" GridPane.rowSpan="9"
+                GridPane.halignment="CENTER"
+                onAction="#generate">
+            <GridPane.margin>
+                <Insets top="20" bottom="20"/>
+            </GridPane.margin>
+        </Button>
+    </GridPane>
+    <GridPane alignment="center" hgap="10" vgap="10">
+        <Label text="Import from file" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"
+               GridPane.rowSpan="1" GridPane.halignment="CENTER" style="-fx-font-weight: bold; -fx-font-size: 21px;">
+            <GridPane.margin>
+                <Insets top="20" bottom="20"/>
+            </GridPane.margin>
+        </Label>
+        <Button text="Import" fx:id="import_button"
+                prefWidth="100" prefHeight="40" defaultButton="true"
+                GridPane.columnIndex="0" GridPane.rowIndex="3"
+                GridPane.columnSpan="2" GridPane.rowSpan="3"
+                GridPane.halignment="CENTER"
+                onAction="#importGeneration">
+            <GridPane.margin>
+                <Insets top="20" bottom="20"/>
+            </GridPane.margin>
+        </Button>
+    </GridPane>
+</SplitPane>
+
+
+
