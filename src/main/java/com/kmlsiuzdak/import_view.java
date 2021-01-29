@@ -72,6 +72,8 @@ public class import_view extends Application {
 
     private void fillCanvas(PixelWriter pixelWriter) {
         Map<Integer, Color> colorMap = getColors(cells);
+        colorMap.put(-2, Color.DARKGREY);
+        colorMap.put(0, Color.WHITE);
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 pixelWriter.setColor(i, j, colorMap.get(matrix[i][j]));
@@ -100,6 +102,8 @@ public class import_view extends Application {
     private Map<Integer, Color> getColors(int cells) {
         Map<Integer, Color> colorMap = new HashMap<>();
         colorMap.put(-1, Color.BLACK);
+        colorMap.put(-2, Color.BLACK);
+        colorMap.put(0, Color.WHITE);
         for (int i = 1; i < cells + 1; i++) {
             colorMap.put(i, Color.rgb(getRandomInt(), getRandomInt(), getRandomInt()));
         }

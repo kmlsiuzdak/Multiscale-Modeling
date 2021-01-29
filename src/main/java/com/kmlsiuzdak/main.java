@@ -13,6 +13,9 @@ public class main extends Application {
         launch();
     }
 
+
+
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/window.fxml"));

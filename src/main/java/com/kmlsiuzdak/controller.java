@@ -27,7 +27,11 @@ public class controller {
     @FXML
     private TextField length_of_inclusion;
     @FXML
+    private TextField probability;
+    @FXML
     private Button submit;
+    @FXML
+    private Button shapeControl;
     @FXML
     private TextField y_size;
     @FXML
@@ -42,7 +46,8 @@ public class controller {
             validateForm();
             grainsView = new grains_view(getIntFromTextField(x_size), getIntFromTextField(y_size),
                     getIntFromTextField(number_of_grains), transition.getValue(), getIntFromTextField(number_of_inclusions),
-                    getIntFromTextField(length_of_inclusion), inclusion_border.getValue(), inclusion_shape.getValue());
+                    getIntFromTextField(length_of_inclusion), getIntFromTextField(probability), false,
+                    inclusion_border.getValue(), inclusion_shape.getValue());
             grainsView.start(new Stage());
         } catch (validation e) {
             showAlert(Alert.AlertType.ERROR, window, "Error", e.getMessage());
@@ -50,6 +55,29 @@ public class controller {
             System.out.println(e.getMessage());
             showAlert(Alert.AlertType.ERROR, window, "Error", "Something went wrong");
         }
+    }
+
+    public void generateWithShapeControl() {
+        grains_view grainsScene;
+        Window window = shapeControl.getScene().getWindow();
+        try {
+            validateShapeControlForm();
+            grainsScene = new grains_view(getIntFromTextField(x_size), getIntFromTextField(y_size),
+                    getIntFromTextField(number_of_grains), transition.getValue(), getIntFromTextField(number_of_inclusions),
+                    getIntFromTextField(length_of_inclusion), getIntFromTextField(probability), true,
+                    inclusion_border.getValue(), inclusion_shape.getValue());
+            grainsScene.start(new Stage());
+        } catch (validation e) {
+            showAlert(Alert.AlertType.ERROR, window, "Form Error!", e.getMessage());
+        } catch (error e) {
+            System.out.println(e.getMessage());
+            showAlert(Alert.AlertType.ERROR, window, "System Error!", "Something went wrong!");
+        }
+    }
+
+    private void validateShapeControlForm() throws validation {
+        validateForm();
+        validateNumberInput(probability, "probability");
     }
 
     public void importGeneration() {
