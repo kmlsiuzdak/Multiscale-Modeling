@@ -24,13 +24,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -179,15 +177,12 @@ public class grains_view extends Application {
     }
 
     private void setGrainsMenu(Map<Integer, Color> colorMap) {
-        Menu grains = new Menu("Grains");
+        Menu grains = new Menu("Border");
         setGrainsMenuItems(grains, colorMap);
         menuBar.getMenus().add(2, grains);
     }
 
     private void setGrainsMenuItems(Menu grains, Map<Integer, Color> colorMap) {
-        CheckMenuItem selectAll = new CheckMenuItem("Select all");
-        selectAll.setOnAction(getSelectAllEvent());
-        grains.getItems().add(selectAll);
         for (Map.Entry<Integer, Color> entry : colorMap.entrySet()) {
             if (entry.getKey() != -1) {
                 CheckMenuItem menuItem = new CheckMenuItem(toRGBCode(entry.getValue()));
@@ -216,25 +211,6 @@ public class grains_view extends Application {
                     }
                 }
                 borderElements.removeIf(indexElement -> indexElement.getValue() == Integer.parseInt(grain.getId()));
-            }
-        };
-    }
-
-    private EventHandler<ActionEvent> getSelectAllEvent() {
-        return actionEvent -> {
-            CheckMenuItem selectAll = ((CheckMenuItem) actionEvent.getSource());
-            if (selectAll.isSelected()) {
-                getBorderElements();
-                for (data_value data_value : borderElements) {
-                    pixelWriter.setColor(data_value.getX(), data_value.getY(), Color.BLACK);
-                    matrix[data_value.getX()][data_value.getY()] = -2;
-                }
-            } else {
-                for (data_value data_value : borderElements) {
-                    pixelWriter.setColor(data_value.getX(), data_value.getY(), colorMap.get(data_value.getValue()));
-                    matrix[data_value.getX()][data_value.getY()] = data_value.getValue();
-                }
-                borderElements.clear();
             }
         };
     }
@@ -319,7 +295,9 @@ public class grains_view extends Application {
     }
 
     private void setStructureMenuItems(Menu menu, Map<Integer, Color> colorMap) {
-        MenuItem menuItem = new MenuItem("Choose structure");
+        MenuItem menuItem = new MenuItem("Choose the structure");
+        Circle circle = new Circle(20, Color.BLACK);
+        menuItem.setGraphic(circle);
         setSubStage(menuItem);
         menu.getItems().add(menuItem);
         for (Map.Entry<Integer, Color> entry : colorMap.entrySet()) {
@@ -402,10 +380,10 @@ public class grains_view extends Application {
     private void prepareMatrixToStructureGrow(Structure structure) {
         graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         switch (structure) {
-            case DUAL_PHASE:
+            case Dualphase:
                 prepareMatrixToDualPhaseGrow();
                 break;
-            case SUBSTRUCTURE:
+            case Substructure:
                 prepareMatrixToSubstructureGrow();
                 break;
         }
@@ -452,7 +430,7 @@ public class grains_view extends Application {
         for (Structure structure : Structure.values()) {
             choiceBox.getItems().add(structure);
         }
-        choiceBox.setValue(Structure.SUBSTRUCTURE);
+        choiceBox.setValue(Structure.Substructure);
     }
 
 

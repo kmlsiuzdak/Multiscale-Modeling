@@ -276,7 +276,7 @@ public class generate_service {
             }
             setIndexElements(changeList);
         }
-        if (Structure.SUBSTRUCTURE.equals(structure)) {
+        if (Structure.Substructure.equals(structure)) {
             setBorders();
         }
         this.selectedGrainsForStructure = null;
